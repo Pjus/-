@@ -36,22 +36,34 @@ def get_dart():
             corp_df['corp_code'] =  corp_code
             corp_df['Stock_code'] = stock_code
             corp_df['Sector'] = sector
+
             try:
                 # 2012년부터 분기별 연결재무제표 불러오기
                 fs = corp.extract_fs(bgn_de='19870101', report_tp='quarter')
+                
+
                 for num in range(0,4):
                     fs[num]['Code'] = stock_code
                     fs[num]['Corp'] = corp_name
+                    print('add code & name')
                     if num == 0:
                         fs[num].to_sql('financial_statement{}'.format(corp_code), con)
+                        print('financial_statement done')
+
                     elif num == 1:
                         fs[num].to_sql('income_statement{}'.format(corp_code), con)
+                        print('income_statement done')
+
                     elif num == 2:
                         fs[num].to_sql('Comprehensive_income_statement{}'.format(corp_code), con)
+                        print('Comprehensive_income_statement done')
+
                     else:
                         fs[num].to_sql('cashflow{}'.format(corp_code), con)
+                        print('cashflow done')
+
             except:
-                pass
+                print('DB err')
 
         except:
             print('corp info err')
