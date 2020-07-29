@@ -40,6 +40,8 @@ def get_dart():
             try:
                 # 2012년부터 분기별 연결재무제표 불러오기
                 fs = corp.extract_fs(bgn_de='19870101', report_tp='quarter')
+
+                #annual semiannual quarter 순으로 뽑는데 안나오는 경우 그냥 사업보고서 분기 보고서 쓰기??
                 
 
                 for num in range(0,4):
