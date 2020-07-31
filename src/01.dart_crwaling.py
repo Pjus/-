@@ -20,7 +20,7 @@ def get_dart():
 
     # corp_df = pd.DataFrame()
 
-    # con = sqlite3.connect("./kospi.db")
+    con = sqlite3.connect("./kospi.db")
 
 
     # for co in corps:
@@ -61,7 +61,7 @@ def get_dart():
     #                     fs[num].to_sql('cashflow{}'.format(corp_code), con)
     #                     print('cashflow done')
 
-    #             #annual semiannual quarter 순으로 뽑는데 안나오는 경우 그냥 사업보고서 or 분기 보고서 쓰기??
+    #             #annual semiannual quarter 순으로 뽑는데 안나오는 경우 그냥 업보고서 or 분기 보고서 쓰기??
     #         except:
     #             print('DB err')
 
