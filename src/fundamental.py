@@ -53,15 +53,22 @@ stock_data = fa.stock_data(ticker, period="ytd", interval="1d")
 stock_data_detailed = fa.stock_data_detailed(ticker, api_key, begin="2000-01-01", end="2020-01-01")
 
 
+"""
 
 데일리 주가 정보 = 환경
 딥러닝 모델 = 에이전트
 주가 지표, 재무 지표, 추세 지표 = 상태
 정책 = DQN 
+보상
 
 
-주당순이익(EPS)	당기순이익/주식수	
-주당순자산가치(BPS)	순자산/주식수	
+주당순이익(EPS)	당기순이익/주식수	쿼터
+주당순자산가치(BPS)	순자산/주식수	쿼터
 
-주가매출액비율(PSR)= 주가/주당매출액
+주가매출액비율(PSR)= 주가/주당매출액 
 시가총액 / 매출액
+
+
+"""
+
+from RL.Indicator import get_Bolinger_Band, get_DMI, get_MACD, get_OBV, get_RSI
