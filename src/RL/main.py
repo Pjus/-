@@ -28,10 +28,12 @@ env = DummyVecEnv([lambda: MyEnv(df)])
 
 
 model = PPO2(MlpPolicy, env, verbose=1)
-model.learn(total_timesteps=20000)
+model.learn(total_timesteps=50)
 
 obs = env.reset()
-for i in range(2000):
+for i in range(len(df['Date'])):
     action, _states = model.predict(obs)
     obs, rewards, done, info = env.step(action)
-    env.render()
+    env.render(title=ticker)
+
+
