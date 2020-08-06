@@ -11,6 +11,9 @@ from flask import Flask, render_template
 import pandas_datareader as pdr
 import numpy as np
 import pandas as pd
+
+from flask import session 
+
 app = Flask(__name__)
 
 def create_hover_tool():
@@ -71,6 +74,10 @@ def create_bar_chart(data, title, x_name, y_name, hover_tool=None,
     plot.xaxis.major_label_orientation = 1
 
     return plot
+@app.route('/')
+def index():
+    return render_template('index.html') #this has changed
+
 
 @app.route("/<int:bars_count>/")
 def chart(bars_count):
