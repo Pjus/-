@@ -1,4 +1,5 @@
 
+
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
@@ -17,9 +18,6 @@ UP_COLOR = '#27A59A'
 DOWN_COLOR = '#EF534F'
 UP_TEXT_COLOR = '#73D3CC'
 DOWN_TEXT_COLOR = '#DC2C27'
-
-def convert_date(date_bytes):
-    return mdates.strpdate2num('%m/%d/%Y')(date_bytes.decode('ascii'))
 
 
 def date2num(date):

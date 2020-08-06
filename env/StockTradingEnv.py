@@ -5,7 +5,7 @@ from gym import spaces
 import pandas as pd
 import numpy as np
 
-from visualize import StockTradingGraph
+from render.StockTradingGraph import StockTradingGraph
 
 MAX_ACCOUNT_BALANCE = 2147483647
 MAX_NUM_SHARES = 2147483647
@@ -42,7 +42,7 @@ class StockTradingEnv(gym.Env):
             low=0, high=1, shape=(5, LOOKBACK_WINDOW_SIZE + 2), dtype=np.float16)
 
     def _adjust_prices(self, df):
-        adjust_ratio = df['Adj Close'] / df['Close']
+        adjust_ratio = df['Adjusted_Close'] / df['Close']
 
         df['Open'] = df['Open'] * adjust_ratio
         df['High'] = df['High'] * adjust_ratio
