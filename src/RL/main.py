@@ -11,7 +11,7 @@ import pandas as pd
 import pandas_datareader as pdr
 
 
-ticker = 'AAPL'
+ticker = 'MSFT'
 start_date = '2010-01-01'
 
 df = pdr.get_data_yahoo(ticker, start_date)
