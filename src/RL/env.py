@@ -54,7 +54,7 @@ class StockTradingEnv(gym.Env):
     def _next_observation(self):
         frame = np.zeros((5, LOOKBACK_WINDOW_SIZE + 1))
 
-        # Get the stock data points for the last 5 days and scale to between 0-1
+        # Get the stock data points for the last 40 days and scale to between 0-1
         np.put(frame, [0, 4], [
             self.df.loc[self.current_step: self.current_step +
                         LOOKBACK_WINDOW_SIZE, 'Open'].values / MAX_SHARE_PRICE,

@@ -26,6 +26,7 @@ env = DummyVecEnv([lambda: StockTradingEnv(df)])
 
 model = PPO2(MlpPolicy, env, verbose=1)
 model.learn(total_timesteps=50)
+# model.predict()
 
 obs = env.reset()
 for i in range(len(df['Date'])):
