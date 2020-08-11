@@ -8,8 +8,19 @@ from env.StockTradingEnv import StockTradingEnv
 
 import pandas as pd
 
-df = pd.read_csv('./data/MSFT.csv')
+
+import pandas_datareader as pdr
+
+
+ticker = 'AAPL'
+start_date = '2018-01-01'
+
+df = pdr.get_data_yahoo(ticker, start_date)
+df['Date'] = df.index
+df.index = range(len(df))
 df = df.sort_values('Date')
+df['Date'] = df['Date'].astype('str')
+
 
 # The algorithms require a vectorized environment to run
 env = DummyVecEnv([lambda: StockTradingEnv(df)])
@@ -21,4 +32,5 @@ obs = env.reset()
 for i in range(len(df['Date'])):
     action, _states = model.predict(obs)
     obs, rewards, done, info = env.step(action)
-    env.render(title="MSFT")
+    print(rewards, done, info)
+    env.render(title="AAPL")

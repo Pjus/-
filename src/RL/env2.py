@@ -5,7 +5,7 @@ from gym import spaces
 import pandas as pd
 import numpy as np
 
-from render.StockTradingGraph import StockTradingGraph
+from visualize import StockTradingGraph
 
 MAX_ACCOUNT_BALANCE = 2147483647
 MAX_NUM_SHARES = 2147483647
@@ -39,7 +39,7 @@ class StockTradingEnv(gym.Env):
 
         # Prices contains the OHCL values for the last five prices
         self.observation_space = spaces.Box(
-            low=0, high=1, shape=(5, LOOKBACK_WINDOW_SIZE + 2), dtype=np.float16)
+            low=0, high=1, shape=(10, LOOKBACK_WINDOW_SIZE + 2), dtype=np.float16)
 
     def _adjust_prices(self, df):
         adjust_ratio = df['Adj Close'] / df['Close']
@@ -54,7 +54,7 @@ class StockTradingEnv(gym.Env):
     def _next_observation(self):
         frame = np.zeros((5, LOOKBACK_WINDOW_SIZE + 1))
 
-        # Get the stock data points for the last 5 days and scale to between 0-1
+        # Get the stock data points for the last 40 days and scale to between 0-1
         np.put(frame, [0, 4], [
             self.df.loc[self.current_step: self.current_step +
                         LOOKBACK_WINDOW_SIZE, 'Open'].values / MAX_SHARE_PRICE,
@@ -138,21 +138,7 @@ class StockTradingEnv(gym.Env):
 
         obs = self._next_observation()
 
-        action = action[0]
-        if action < 1:
-            act = 'Buy'
-        elif action < 2:
-            act = 'Sell'
-        else:
-            act = 'Hold'
-        
-        trade = self.trades
-        if len(trade) > 0:
-            tra = trade[-1]['type']
-        else:
-            tra = None
-
-        return obs, reward, done, {act, tra}
+        return obs, reward, done, {}
 
     def reset(self):
         # Reset the state of the environment to an initial state
